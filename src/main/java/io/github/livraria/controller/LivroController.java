@@ -3,6 +3,7 @@ package io.github.livraria.controller;
 import io.github.livraria.model.Livro;
 import io.github.livraria.repository.LivroRepository;
 import io.github.livraria.service.LivroService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class LivroController {
     }
 
     @PostMapping
-    public Livro criar(@RequestBody Livro livro){
+    public Livro criar(@Valid @RequestBody Livro livro){
         return livroService.salvar(livro);
     }
 
@@ -39,7 +40,7 @@ public class LivroController {
     }
 
     @PutMapping("/{id}")
-    public Livro atualizar(@PathVariable Long id, @RequestBody Livro livro){
+    public Livro atualizar(@PathVariable Long id, @Valid @RequestBody Livro livro){
         livro.setId(id); //Definindo o ID do livro a ser atualizado
         return livroService.salvar(livro);
     }
